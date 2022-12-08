@@ -3,15 +3,15 @@ resource "harvester_virtualmachine" "web" {
     harvester_image.os_image
   ]
 
-  name         = var.web_vm_data.name
-  namespace    = var.web_vm_data.namespace
-  description  = var.web_vm_data.description
+  name        = var.web_vm_data.name
+  namespace   = var.web_vm_data.namespace
+  description = var.web_vm_data.description
 
-  hostname     = var.web_vm_data.hostname
-  tags         = var.web_vm_data.tags
+  hostname = var.web_vm_data.hostname
+  tags     = var.web_vm_data.tags
 
-  cpu          = var.web_vm_data.cpus
-  memory       = var.web_vm_data.memory
+  cpu    = var.web_vm_data.cpus
+  memory = var.web_vm_data.memory
 
   run_strategy = "RerunOnFailure"
 
@@ -45,15 +45,15 @@ resource "harvester_virtualmachine" "db" {
     harvester_image.os_image
   ]
 
-  name         = var.db_vm_data.name
-  namespace    = var.db_vm_data.namespace
-  description  = var.db_vm_data.description
+  name        = var.db_vm_data.name
+  namespace   = var.db_vm_data.namespace
+  description = var.db_vm_data.description
 
-  hostname     = var.db_vm_data.hostname
-  tags         = var.db_vm_data.tags
+  hostname = var.db_vm_data.hostname
+  tags     = var.db_vm_data.tags
 
-  cpu          = var.db_vm_data.cpus
-  memory       = var.db_vm_data.memory
+  cpu    = var.db_vm_data.cpus
+  memory = var.db_vm_data.memory
 
   run_strategy = "RerunOnFailure"
 

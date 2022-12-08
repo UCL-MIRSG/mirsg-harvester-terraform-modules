@@ -9,5 +9,5 @@ terraform {
 }
 
 provider "harvester" {
-    kubeconfig = var.kubeconfig_path
+  kubeconfig = var.kubeconfig_path
 }
