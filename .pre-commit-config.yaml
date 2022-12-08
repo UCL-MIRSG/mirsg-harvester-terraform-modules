@@ -5,12 +5,15 @@ repos:
       - id: tflint
         args:
           - "--module"
-          - "--deep"
       - id: terraform-validate
       - id: terraform-fmt
+        args:
+          - "-diff"
+          - "-write=true"
+          - "-check=false"
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.77.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
     hooks:
       - id: terraform_tfsec
       - id: terraform_docs
-      - id: checkov
+      - id: terraform_checkov
