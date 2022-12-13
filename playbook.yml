@@ -1,0 +1,8 @@
+---
+- name: Create virtual machines
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Run terraform
+      community.general.terraform:
+        project_path: "./tf"

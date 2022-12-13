@@ -33,7 +33,7 @@ variable "vm_network" {
     namespace = string
   })
   default = {
-    vlanid    = "" # needs to be filled when a network has been created
+    vlanid    = "vlan" # needs to be filled when a network has been created
     namespace = "default"
   }
 }
