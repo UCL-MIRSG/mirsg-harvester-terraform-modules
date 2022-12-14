@@ -29,12 +29,16 @@ variable "os_image" {
 variable "vm_network" {
   description = "network for virtual machines"
   type = object({
-    vlanid    = string
+    name    = string
     namespace = string
+    route_mode = string
+    route_dhcp_server_ip = string
   })
   default = {
-    vlanid    = "vlan" # needs to be filled when a network has been created
+    name    = "mgmt-vlan1"
     namespace = "default"
+    route_mode = "auto"
+    route_dhcp_server_ip = ""
   }
 }
 
