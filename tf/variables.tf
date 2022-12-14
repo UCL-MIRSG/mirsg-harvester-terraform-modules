@@ -1,7 +1,7 @@
 variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
-  default     = ""
+  default     = "/etc/rancher/rke2/rke2.yaml"
 }
 
 variable "os_image" {
