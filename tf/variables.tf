@@ -1,7 +1,7 @@
 variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
-  default     = "/etc/rancher/rke2/rke2.yaml"
+  default     = "./kubeconfig.yaml"
 }
 
 variable "os_image" {
@@ -18,7 +18,7 @@ variable "os_image" {
   default = {
     name         = "centos7"
     namespace    = "default"
-    display_name = "centos7"
+    display_name = "centos-7-x86_64-genericcloud.qcow2"
     description  = ""
     source_type  = "download"
     url          = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
@@ -35,7 +35,7 @@ variable "vm_network" {
     route_dhcp_server_ip = string
   })
   default = {
-    name    = "mgmt-vlan1"
+    name    = "mgmt"
     namespace = "default"
     route_mode = "auto"
     route_dhcp_server_ip = ""
@@ -75,9 +75,9 @@ variable "web_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "web.xnat.dev"
+    hostname  = "xnat-web"
     memory    = "2Gi"
-    name      = "web"
+    name      = "xnat-web"
     namespace = "default"
     tags = {
       "vm" = "web"
@@ -118,9 +118,9 @@ variable "db_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "db.xnat.dev"
+    hostname  = "xnat-db"
     memory    = "2Gi"
-    name      = "db"
+    name      = "xnat-db"
     namespace = "default"
     tags = {
       "vm" = "db"
