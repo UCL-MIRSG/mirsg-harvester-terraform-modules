@@ -14,7 +14,6 @@ resource "harvester_virtualmachine" "web" {
 
   network_interface {
     name         = "nic-0"
-    # network_name = data.harvester_clusternetwork.mgmt.name
   }
 
   disk {
@@ -53,7 +52,6 @@ resource "harvester_virtualmachine" "db" {
 
   network_interface {
     name         = "nic-0"
-    # network_name = data.harvester_clusternetwork.mgmt.name
   }
 
   disk {
