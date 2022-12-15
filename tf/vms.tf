@@ -1,7 +1,4 @@
 resource "harvester_virtualmachine" "web" {
-  depends_on = [
-    harvester_image.os_image
-  ]
 
   name        = var.web_vm_data.name
   namespace   = var.web_vm_data.namespace
@@ -17,7 +14,7 @@ resource "harvester_virtualmachine" "web" {
 
   network_interface {
     name         = "nic-0"
-    network_name = var.vm_network.name
+    # network_name = data.harvester_clusternetwork.mgmt.name
   }
 
   disk {
@@ -26,7 +23,7 @@ resource "harvester_virtualmachine" "web" {
     size        = var.web_vm_data.disks[0].size
     bus         = "virtio"
     boot_order  = var.web_vm_data.disks[0].boot_order
-    image       = harvester_image.os_image.id
+    image       = data.harvester_image.os_image.id
     auto_delete = true
   }
 
@@ -41,9 +38,6 @@ resource "harvester_virtualmachine" "web" {
 }
 
 resource "harvester_virtualmachine" "db" {
-  depends_on = [
-    harvester_image.os_image
-  ]
 
   name        = var.db_vm_data.name
   namespace   = var.db_vm_data.namespace
@@ -59,7 +53,7 @@ resource "harvester_virtualmachine" "db" {
 
   network_interface {
     name         = "nic-0"
-    network_name = var.vm_network.name
+    # network_name = data.harvester_clusternetwork.mgmt.name
   }
 
   disk {
@@ -68,7 +62,7 @@ resource "harvester_virtualmachine" "db" {
     size        = var.db_vm_data.disks[0].size
     bus         = "virtio"
     boot_order  = var.db_vm_data.disks[0].boot_order
-    image       = harvester_image.os_image.id
+    image       = data.harvester_image.os_image.id
     auto_delete = true
   }
 
