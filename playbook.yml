@@ -1,8 +1,24 @@
 ---
-- name: Create virtual machines
-  hosts: localhost
+- name: main
+  hosts: all
+  gather_facts: false
   connection: local
   tasks:
-    - name: Run terraform
+    - name: plan
       community.general.terraform:
         project_path: "./tf"
+        plan_file: "./tf/tfplan"
+        lock: true
+        state: planned
+
+    - name: apply
+      community.general.terraform:
+        project_path: "./tf"
+        lock: true
+        state: present
+
+    - name: destroy
+      community.general.terraform:
+        project_path: "./tf"
+        lock: true
+        state: absent
