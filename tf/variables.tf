@@ -4,6 +4,20 @@ variable "kubeconfig_path" {
   default     = "./kubeconfig.yaml"
 }
 
+variable "USER_NAME" {
+  description = "OS user to create"
+  type = string
+}
+
+variable "USER_PASSWORD_HASH" {
+  description = "OS user password hash"
+  type = string
+}
+
+variable "USER_PUBLIC_KEY_PATH" {
+  description = "path to public for OS user"
+  type = string
+}
 variable "os_image" {
   description = "OS image for virtual machines"
   type = object({
@@ -16,12 +30,12 @@ variable "os_image" {
     tags         = map(string)
   })
   default = {
-    name         = "centos7"
+    name         = "rocky8"
     namespace    = "default"
-    display_name = "centos-7-x86_64-genericcloud.qcow2"
+    display_name = "rocky-8-genericcloud.latest.x86_64.qcow2"
     description  = ""
     source_type  = "download"
-    url          = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
+    url          = "https://download.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud.latest.x86_64.qcow2"
     tags         = { "format" = "qcow2" }
   }
 }
