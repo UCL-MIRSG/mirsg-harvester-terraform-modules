@@ -34,6 +34,15 @@ resource "harvester_virtualmachine" "web" {
     boot_order  = var.web_vm_data.disks[1].boot_order
     auto_delete = true
   }
+
+  cloudinit {
+    user_data = templatefile("../scripts/user_data.yml", {
+      user_name: var.user_name,
+      user_password: var.user_password
+      public_key: file(var.public_key_path)
+    })
+    network_data = ""
+  }
 }
 
 resource "harvester_virtualmachine" "db" {
@@ -71,5 +80,14 @@ resource "harvester_virtualmachine" "db" {
     bus         = "virtio"
     boot_order  = var.db_vm_data.disks[1].boot_order
     auto_delete = true
+  }
+
+  cloudinit {
+    user_data = templatefile("../scripts/user_data.yml", {
+      user_name: var.user_name,
+      # user_password: var.user_password
+      public_key: file(var.public_key_path)
+    })
+    network_data = ""
   }
 }
