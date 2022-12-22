@@ -1,9 +1,23 @@
 variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
-  default     = ""
+  default     = "./kubeconfig.yaml"
 }
 
+variable "USER_NAME" {
+  description = "OS user to create"
+  type = string
+}
+
+variable "USER_PASSWORD_HASH" {
+  description = "OS user password hash"
+  type = string
+}
+
+variable "USER_PUBLIC_KEY_PATH" {
+  description = "path to public for OS user"
+  type = string
+}
 variable "os_image" {
   description = "OS image for virtual machines"
   type = object({
@@ -16,12 +30,12 @@ variable "os_image" {
     tags         = map(string)
   })
   default = {
-    name         = "centos7"
+    name         = "rocky8"
     namespace    = "default"
-    display_name = "centos7"
+    display_name = "rocky-8-genericcloud.latest.x86_64.qcow2"
     description  = ""
     source_type  = "download"
-    url          = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
+    url          = "https://download.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud.latest.x86_64.qcow2"
     tags         = { "format" = "qcow2" }
   }
 }
@@ -29,12 +43,16 @@ variable "os_image" {
 variable "vm_network" {
   description = "network for virtual machines"
   type = object({
-    vlanid    = string
+    name    = string
     namespace = string
+    route_mode = string
+    route_dhcp_server_ip = string
   })
   default = {
-    vlanid    = "" # needs to be filled when a network has been created
+    name    = "mgmt"
     namespace = "default"
+    route_mode = "auto"
+    route_dhcp_server_ip = ""
   }
 }
 
@@ -71,9 +89,9 @@ variable "web_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "web.xnat.dev"
+    hostname  = "xnat-web"
     memory    = "2Gi"
-    name      = "web"
+    name      = "xnat-web"
     namespace = "default"
     tags = {
       "vm" = "web"
@@ -114,9 +132,9 @@ variable "db_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "db.xnat.dev"
+    hostname  = "xnat-db"
     memory    = "2Gi"
-    name      = "db"
+    name      = "xnat-db"
     namespace = "default"
     tags = {
       "vm" = "db"

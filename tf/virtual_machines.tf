@@ -1,7 +1,4 @@
 resource "harvester_virtualmachine" "web" {
-  depends_on = [
-    harvester_image.os_image
-  ]
 
   name        = var.web_vm_data.name
   namespace   = var.web_vm_data.namespace
@@ -17,7 +14,6 @@ resource "harvester_virtualmachine" "web" {
 
   network_interface {
     name         = "nic-0"
-    network_name = data.harvester_network.vm_network.name
   }
 
   disk {
@@ -26,7 +22,7 @@ resource "harvester_virtualmachine" "web" {
     size        = var.web_vm_data.disks[0].size
     bus         = "virtio"
     boot_order  = var.web_vm_data.disks[0].boot_order
-    image       = harvester_image.os_image.id
+    image       = data.harvester_image.os_image.id
     auto_delete = true
   }
 
@@ -38,12 +34,18 @@ resource "harvester_virtualmachine" "web" {
     boot_order  = var.web_vm_data.disks[1].boot_order
     auto_delete = true
   }
+
+  cloudinit {
+    user_data = templatefile("../scripts/user_data.yml", {
+      USER_NAME: var.USER_NAME,
+      USER_PASSWORD_HASH: var.USER_PASSWORD_HASH
+      USER_PUBLIC_KEY_PATH: file(var.USER_PUBLIC_KEY_PATH)
+    })
+    network_data = ""
+  }
 }
 
 resource "harvester_virtualmachine" "db" {
-  depends_on = [
-    harvester_image.os_image
-  ]
 
   name        = var.db_vm_data.name
   namespace   = var.db_vm_data.namespace
@@ -59,7 +61,6 @@ resource "harvester_virtualmachine" "db" {
 
   network_interface {
     name         = "nic-0"
-    network_name = data.harvester_network.vm_network.name
   }
 
   disk {
@@ -68,7 +69,7 @@ resource "harvester_virtualmachine" "db" {
     size        = var.db_vm_data.disks[0].size
     bus         = "virtio"
     boot_order  = var.db_vm_data.disks[0].boot_order
-    image       = harvester_image.os_image.id
+    image       = data.harvester_image.os_image.id
     auto_delete = true
   }
 
@@ -79,5 +80,14 @@ resource "harvester_virtualmachine" "db" {
     bus         = "virtio"
     boot_order  = var.db_vm_data.disks[1].boot_order
     auto_delete = true
+  }
+
+  cloudinit {
+    user_data = templatefile("../scripts/user_data.yml", {
+      USER_NAME: var.USER_NAME,
+      USER_PASSWORD_HASH: var.USER_PASSWORD_HASH
+      USER_PUBLIC_KEY_PATH: file(var.USER_PUBLIC_KEY_PATH)
+    })
+    network_data = ""
   }
 }
