@@ -18,5 +18,5 @@ users:
     lock_passwd: false
     shell: /bin/bash
     ssh_authorized_keys:
-      - ${USER_PUBLIC_KEY_PATH}
+      - ${USER_PUBLIC_KEY}
 ##...

@@ -39,7 +39,7 @@ resource "harvester_virtualmachine" "web" {
     user_data = templatefile("../scripts/user_data.yml", {
       USER_NAME: var.USER_NAME,
       USER_PASSWORD_HASH: var.USER_PASSWORD_HASH
-      USER_PUBLIC_KEY_PATH: file(var.USER_PUBLIC_KEY_PATH)
+      USER_PUBLIC_KEY: file(var.USER_PUBLIC_KEY_PATH)
     })
     network_data = ""
   }
@@ -86,7 +86,7 @@ resource "harvester_virtualmachine" "db" {
     user_data = templatefile("../scripts/user_data.yml", {
       USER_NAME: var.USER_NAME,
       USER_PASSWORD_HASH: var.USER_PASSWORD_HASH
-      USER_PUBLIC_KEY_PATH: file(var.USER_PUBLIC_KEY_PATH)
+      USER_PUBLIC_KEY: file(var.USER_PUBLIC_KEY_PATH)
     })
     network_data = ""
   }
