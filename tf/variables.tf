@@ -18,6 +18,11 @@ variable "USER_PUBLIC_KEY_PATH" {
   description = "path to public for OS user"
   type = string
 }
+
+variable "USER_PRIVATE_KEY_PATH" {
+  description = "path to private key for OS user"
+  type = string
+}
 variable "os_image" {
   description = "OS image for virtual machines"
   type = object({
@@ -55,7 +60,6 @@ variable "vm_network" {
     route_dhcp_server_ip = ""
   }
 }
-
 variable "web_vm_data" {
   description = "parameters for web virtual machine"
   type = object({
