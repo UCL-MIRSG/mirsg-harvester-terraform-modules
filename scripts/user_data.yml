@@ -13,6 +13,7 @@ users:
   ${USER_NAME}:
     groups:
       - "wheel"
+    sudo: ALL=(ALL) NOPASSWD:ALL
     passwd: ${USER_PASSWORD_HASH}
     lock_passwd: false
     shell: /bin/bash
