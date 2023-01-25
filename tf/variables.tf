@@ -1,7 +1,7 @@
 variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
-  default     = "./kubeconfig.yaml"
+  default     = "./kubeconfig.yml"
 }
 
 variable "USER_NAME" {
@@ -60,6 +60,7 @@ variable "vm_network" {
     route_dhcp_server_ip = ""
   }
 }
+
 variable "web_vm_data" {
   description = "parameters for web virtual machine"
   type = object({
@@ -93,9 +94,9 @@ variable "web_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "xnat-web"
+    hostname  = "dev-xnat-web"
     memory    = "2Gi"
-    name      = "xnat-web"
+    name      = "dev-xnat-web"
     namespace = "default"
     tags = {
       "vm" = "web"
@@ -136,9 +137,9 @@ variable "db_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "xnat-db"
+    hostname  = "dev-xnat-db"
     memory    = "2Gi"
-    name      = "xnat-db"
+    name      = "dev-xnat-db"
     namespace = "default"
     tags = {
       "vm" = "db"
