@@ -1,7 +1,7 @@
 variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
-  default     = "./kubeconfig.yaml"
+  default     = "./kubeconfig.yml"
 }
 
 variable "USER_NAME" {
@@ -18,6 +18,11 @@ variable "USER_PUBLIC_KEY_PATH" {
   description = "path to public for OS user"
   type = string
 }
+
+variable "USER_PRIVATE_KEY_PATH" {
+  description = "path to private key for OS user"
+  type = string
+}
 variable "os_image" {
   description = "OS image for virtual machines"
   type = object({
@@ -30,12 +35,12 @@ variable "os_image" {
     tags         = map(string)
   })
   default = {
-    name         = "rocky8"
+    name         = "centos7"
     namespace    = "default"
-    display_name = "rocky-8-genericcloud.latest.x86_64.qcow2"
+    display_name = "centos-7-x86_64-genericcloud.qcow2"
     description  = ""
     source_type  = "download"
-    url          = "https://download.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud.latest.x86_64.qcow2"
+    url          = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
     tags         = { "format" = "qcow2" }
   }
 }
@@ -89,9 +94,9 @@ variable "web_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "xnat-web"
+    hostname  = "dev-xnat-web"
     memory    = "2Gi"
-    name      = "xnat-web"
+    name      = "dev-xnat-web"
     namespace = "default"
     tags = {
       "vm" = "web"
@@ -132,9 +137,9 @@ variable "db_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "xnat-db"
+    hostname  = "dev-xnat-db"
     memory    = "2Gi"
-    name      = "xnat-db"
+    name      = "dev-xnat-db"
     namespace = "default"
     tags = {
       "vm" = "db"

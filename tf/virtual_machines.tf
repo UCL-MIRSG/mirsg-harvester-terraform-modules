@@ -36,10 +36,10 @@ resource "harvester_virtualmachine" "web" {
   }
 
   cloudinit {
-    user_data = templatefile("../scripts/user_data.yml", {
+    user_data = templatefile("../scripts/user_data.yml.tftpl", {
       USER_NAME: var.USER_NAME,
       USER_PASSWORD_HASH: var.USER_PASSWORD_HASH
-      USER_PUBLIC_KEY_PATH: file(var.USER_PUBLIC_KEY_PATH)
+      USER_PUBLIC_KEY: file(var.USER_PUBLIC_KEY_PATH)
     })
     network_data = ""
   }
@@ -83,10 +83,10 @@ resource "harvester_virtualmachine" "db" {
   }
 
   cloudinit {
-    user_data = templatefile("../scripts/user_data.yml", {
+    user_data = templatefile("../scripts/user_data.yml.tftpl", {
       USER_NAME: var.USER_NAME,
       USER_PASSWORD_HASH: var.USER_PASSWORD_HASH
-      USER_PUBLIC_KEY_PATH: file(var.USER_PUBLIC_KEY_PATH)
+      USER_PUBLIC_KEY: file(var.USER_PUBLIC_KEY_PATH)
     })
     network_data = ""
   }
