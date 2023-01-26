@@ -22,7 +22,7 @@ provider "harvester" {
 
 # create database VM
 module "db_virtual_machine" {
-    source = "../../modules/virtual_machine"
+    source = "../../modules/virtual-machine"
 
     user = var.USER_NAME
     password_hash = var.USER_PASSWORD_HASH
@@ -34,7 +34,7 @@ module "db_virtual_machine" {
 
 # create web VM
 module "web_virtual_machine" {
-    source = "../../modules/virtual_machine"
+    source = "../../modules/virtual-machine"
 
     user = var.USER_NAME
     password_hash = var.USER_PASSWORD_HASH
