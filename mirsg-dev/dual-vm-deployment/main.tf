@@ -100,7 +100,7 @@ module "db_pg_clusterip" {
 
     vm_name = var.db_vm_data.name
     service_name = "${var.db_vm_data.name}-pg"
-    name =  "${var.db_vm_data.name}-pg-port"
+    clusterip_name =  "${var.db_vm_data.name}-pg-port"
     port = var.db_vm_data.pg_port
     target_port = var.db_vm_data.pg_target_port
 }
