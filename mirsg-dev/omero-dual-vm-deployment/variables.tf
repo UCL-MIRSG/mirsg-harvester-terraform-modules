@@ -89,7 +89,7 @@ variable "db_vm_data" {
     namespace = "default"
     pg_port = 5432
     pg_target_port = 5432
-    ssh_node_port = 30204
+    ssh_node_port = 30205
     ssh_port = 22
     ssh_target_port = 22
     tags = {
@@ -147,13 +147,13 @@ variable "web_vm_data" {
     tags = {
       "vm" = "web"
     }
-    http_node_port = 30202
+    http_node_port = 30206
     http_port = 80
     http_target_port = 80
-    https_node_port = 30203
+    https_node_port = 30207
     https_port = 443
     https_target_port = 443
-    ssh_node_port = 30201
+    ssh_node_port = 30208
     ssh_port = 22
     ssh_target_port = 22
   }
