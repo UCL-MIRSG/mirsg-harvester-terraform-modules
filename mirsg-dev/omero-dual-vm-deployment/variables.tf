@@ -1,7 +1,7 @@
 variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
-  default     = "./kubeconfig.yml"
+  default     = "../mirsg_dev_kubeconfig.yml"
 }
 
 variable "USER_NAME" {
@@ -35,72 +35,13 @@ variable "os_image" {
     tags         = map(string)
   })
   default = {
-    name         = "centos7"
+    name         = "rocky8"
     namespace    = "default"
-    display_name = "centos-7-x86_64-genericcloud.qcow2"
+    display_name = "rocky-8-genericcloud.latest.x86_64.qcow2"
     description  = ""
     source_type  = "download"
-    url          = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
+    url          = "https://download.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud.latest.x86_64.qcow2"
     tags         = { "format" = "qcow2" }
-  }
-}
-
-variable "vm_network" {
-  description = "network for virtual machines"
-  type = object({
-    name    = string
-    namespace = string
-    route_mode = string
-    route_dhcp_server_ip = string
-  })
-  default = {
-    name    = "mgmt"
-    namespace = "default"
-    route_mode = "auto"
-    route_dhcp_server_ip = ""
-  }
-}
-
-variable "web_vm_data" {
-  description = "parameters for web virtual machine"
-  type = object({
-    name        = string
-    namespace   = string
-    description = string
-    hostname    = string
-    tags        = map(string)
-    cpus        = number
-    memory      = string
-    disks = list(
-      object({
-        name       = string
-        size       = string
-        boot_order = number
-      })
-    )
-  })
-  default = {
-    cpus        = 1
-    description = "value"
-    disks = [
-      {
-        name       = "rootdisk"
-        size       = "10Gi"
-        boot_order = 1
-      },
-      {
-        name       = "emptydisk"
-        size       = "40Gi"
-        boot_order = 2
-      }
-    ]
-    hostname  = "dev-xnat-web"
-    memory    = "2Gi"
-    name      = "dev-xnat-web"
-    namespace = "default"
-    tags = {
-      "vm" = "web"
-    }
   }
 }
 
@@ -121,6 +62,11 @@ variable "db_vm_data" {
         boot_order = number
       })
     )
+    pg_port = number
+    pg_target_port = number
+    ssh_node_port = number
+    ssh_port = number
+    ssh_target_port = number
   })
   default = {
     cpus        = 1
@@ -137,12 +83,78 @@ variable "db_vm_data" {
         boot_order = 2
       }
     ]
-    hostname  = "dev-xnat-db"
-    memory    = "2Gi"
-    name      = "dev-xnat-db"
+    hostname  = "dev-omero-db"
+    memory    = "8Gi"
+    name      = "dev-omero-db"
     namespace = "default"
+    pg_port = 5432
+    pg_target_port = 5432
+    ssh_node_port = 30204
+    ssh_port = 22
+    ssh_target_port = 22
     tags = {
       "vm" = "db"
     }
+  }
+}
+
+variable "web_vm_data" {
+  description = "parameters for web virtual machine"
+  type = object({
+    name        = string
+    namespace   = string
+    description = string
+    hostname    = string
+    tags        = map(string)
+    cpus        = number
+    memory      = string
+    disks = list(
+      object({
+        name       = string
+        size       = string
+        boot_order = number
+      })
+    )
+    http_node_port = number
+    http_port = number
+    http_target_port = number
+    https_node_port = number
+    https_port = number
+    https_target_port = number
+    ssh_node_port = number
+    ssh_port = number
+    ssh_target_port = number
+  })
+  default = {
+    cpus        = 1
+    description = "value"
+    disks = [
+      {
+        name       = "rootdisk"
+        size       = "10Gi"
+        boot_order = 1
+      },
+      {
+        name       = "emptydisk"
+        size       = "40Gi"
+        boot_order = 2
+      }
+    ]
+    hostname  = "dev-omero-web"
+    memory    = "8Gi"
+    name      = "dev-omero-web"
+    namespace = "default"
+    tags = {
+      "vm" = "web"
+    }
+    http_node_port = 30202
+    http_port = 80
+    http_target_port = 80
+    https_node_port = 30203
+    https_port = 443
+    https_target_port = 443
+    ssh_node_port = 30201
+    ssh_port = 22
+    ssh_target_port = 22
   }
 }

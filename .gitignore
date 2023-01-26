@@ -10,3 +10,6 @@
 # .tfstate files
 **/*.tfstate
 **/*.tfstate.*
+
+# kubernetes config file
+*kubeconfig*
