@@ -1,7 +1,7 @@
 variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
-  default     = "./kubeconfig.yml"
+  default     = "./mirsg_dev_kubeconfig.yml"
 }
 
 variable "USER_NAME" {
