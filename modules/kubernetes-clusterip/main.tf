@@ -8,10 +8,6 @@ terraform {
   }
 }
 
-provider "kubernetes" {
-  config_path = var.kubeconfig_path
-}
-
 resource "kubernetes_service" "clusterip" {
   metadata {
     name = "${var.service_name}"
