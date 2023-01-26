@@ -13,22 +13,7 @@ variable "service_name" {
   type = string
 }
 
-variable "node_port_name" {
-  description = "The name of service."
-  type = string
-}
-
-variable "node_port" {
-  description = "The NodePort value."
-  type = string
-}
-
-variable "port" {
-  description = "The port number being opened."
-  type = string
-}
-
-variable "target_port" {
-  description = "The port number being targeted."
-  type = string
+variable "ports" {
+  description = "The ports inline block"
+  type = map
 }
