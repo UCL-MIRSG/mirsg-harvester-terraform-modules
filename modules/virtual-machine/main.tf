@@ -8,6 +8,10 @@ terraform {
   }
 }
 
+data "harvester_image" "os_image" {
+  display_name =  var.os_image.display_name
+}
+
 
 resource "harvester_virtualmachine" "vm" {
 
