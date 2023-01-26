@@ -37,7 +37,7 @@ variable "os_image" {
   default = {
     name         = "rocky8"
     namespace    = "default"
-    display_name = "rocky-8-genericcloud.latest.x86_64.qcow2 "
+    display_name = "rocky-8-genericcloud.latest.x86_64.qcow2"
     description  = ""
     source_type  = "download"
     url          = "https://download.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud.latest.x86_64.qcow2"
