@@ -79,7 +79,7 @@ module "web_http_https_node_port" {
     source = "../../modules/kubernetes-nodeport"
 
     vm_name = var.web_vm_data.name
-    service_name = "${var.web_vm_data.name}-ssh"
+    service_name = var.web_vm_data.name
     ports = {
         "${var.web_vm_data.name}-http-port" = {
             node_port = var.web_vm_data.http_node_port,
