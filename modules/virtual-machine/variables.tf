@@ -8,13 +8,8 @@ variable "password_hash" {
   type = string
 }
 
-variable "public_key_path" {
-  description = "path to public for OS user"
-  type = string
-}
-
-variable "private_key_path" {
-  description = "path to private key for OS user"
+variable "public_key" {
+  description = "Public key for OS user"
   type = string
 }
 
