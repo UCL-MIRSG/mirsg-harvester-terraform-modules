@@ -22,7 +22,6 @@ resource "kubernetes_service" "nodeport" {
 
         content {
             name        = port.key
-            node_port   = port.value.node_port
             port        = port.value.port
             target_port = port.value.target_port
         }
