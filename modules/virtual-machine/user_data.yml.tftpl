@@ -9,8 +9,6 @@ runcmd:
   - - systemctl
     - enable
     - --now
-    - /bin/systemctl enable firewalld
-    - /bin/systemctl start firewalld
     - qemu-guest-agent.service
 users:
   ${USER_NAME}:
