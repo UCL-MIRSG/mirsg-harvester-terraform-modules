@@ -51,7 +51,11 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   cloudinit {
-    user_data = var.user_data
+    user_data = templatefile("${path.module}/user_data.yml.tftpl", {
+      USER_NAME: var.user,
+      USER_PASSWORD_HASH: var.password_hash
+      USER_PUBLIC_KEY: var.public_key
+    })
     network_data = ""
   }
 }

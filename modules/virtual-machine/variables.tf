@@ -1,5 +1,15 @@
-variable "user_data" {
-  description = "cloud-init user_data"
+variable "user" {
+  description = "OS user to create"
+  type = string
+}
+
+variable "password_hash" {
+  description = "OS user password hash"
+  type = string
+}
+
+variable "public_key" {
+  description = "Public key for OS user"
   type = string
 }
 
