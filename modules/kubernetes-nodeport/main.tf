@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 0.13"
   required_providers {
     kubernetes = {
-      source = "hashicorp/kubernetes"
+      source  = "hashicorp/kubernetes"
       version = "2.16.1"
     }
   }
@@ -18,13 +18,13 @@ resource "kubernetes_service" "nodeport" {
     }
 
     dynamic "port" {
-        for_each = var.ports
+      for_each = var.ports
 
-        content {
-            name        = port.key
-            port        = port.value.port
-            target_port = port.value.target_port
-        }
+      content {
+        name        = port.key
+        port        = port.value.port
+        target_port = port.value.target_port
+      }
     }
 
     type = "NodePort"

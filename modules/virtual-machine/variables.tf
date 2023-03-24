@@ -1,6 +1,6 @@
 variable "user_data" {
   description = "cloud-init user_data"
-  type = string
+  type        = string
 }
 
 variable "os_image" {

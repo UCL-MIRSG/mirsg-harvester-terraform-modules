@@ -9,7 +9,7 @@ terraform {
 }
 
 data "harvester_image" "os_image" {
-  display_name =  var.os_image.display_name
+  display_name = var.os_image.display_name
 }
 
 
@@ -28,7 +28,7 @@ resource "harvester_virtualmachine" "vm" {
   run_strategy = "RerunOnFailure"
 
   network_interface {
-    name         = "nic-0"
+    name = "nic-0"
   }
 
   disk {
@@ -51,7 +51,7 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   cloudinit {
-    user_data = var.user_data
+    user_data    = var.user_data
     network_data = ""
   }
 }

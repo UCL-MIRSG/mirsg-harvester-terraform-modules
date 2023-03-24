@@ -1,19 +1,18 @@
 repos:
-  - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.17 # Get the latest from: https://github.com/gruntwork-io/pre-commit/releases
+  - repo: https://github.com/bridgecrewio/checkov.git
+    rev: 2.3.114 # change to tag or sha
     hooks:
-      - id: tflint
-        args:
-          - "--module"
-      - id: terraform-validate
-      - id: terraform-fmt
-        args:
-          - "-diff"
-          - "-write=true"
-          - "-check=false"
+      - id: checkov
+        args: [--skip-check, 'CKV_K8S_21']
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.77.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+    rev: v1.77.1 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
     hooks:
       - id: terraform_tfsec
       - id: terraform_docs
-      - id: terraform_checkov
+      - id: terraform_fmt
+        args:
+          - --args=-diff
+      - id: terraform_tflint
+        args:
+          - --args=--module
+      - id: terraform_validate
