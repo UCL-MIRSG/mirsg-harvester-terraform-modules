@@ -1,4 +1,22 @@
 repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: trailing-whitespace
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.3.0
+    hooks:
+      - id: forbid-tabs
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.23.0
+    hooks:
+      - id: check-github-workflows
   - repo: https://github.com/bridgecrewio/checkov.git
     rev: 2.3.114 # change to tag or sha
     hooks:
