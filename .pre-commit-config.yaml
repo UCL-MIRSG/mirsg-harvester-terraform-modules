@@ -17,16 +17,9 @@ repos:
     rev: 0.23.0
     hooks:
       - id: check-github-workflows
-  - repo: https://github.com/bridgecrewio/checkov.git
-    rev: 2.3.245 # change to tag or sha
-    hooks:
-      - id: checkov
-        args: [--skip-check, 'CKV_K8S_21,CKV2_GHA_1']
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.79.1 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
     hooks:
-      - id: terraform_tfsec
-      - id: terraform_docs
       - id: terraform_fmt
         args:
           - --args=-diff
@@ -34,3 +27,16 @@ repos:
         args:
           - --args=--module
       - id: terraform_validate
+  - repo: https://github.com/aquasecurity/tfsec
+    rev: v1.28.1
+    hooks:
+      - id: tfsec
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: v0.16.0
+    hooks:
+      - id: terraform-docs-go
+        args: ["markdown", "--output-file", "README.md", "./modules/virtual-machine"]
+      - id: terraform-docs-go
+        args: ["markdown", "--output-file", "README.md", "./modules/kubernetes-nodeport"]
+      - id: terraform-docs-go
+        args: ["markdown", "--output-file", "README.md", "./modules/kubernetes-clusterip"]
