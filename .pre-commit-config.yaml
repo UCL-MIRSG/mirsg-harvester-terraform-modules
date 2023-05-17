@@ -21,7 +21,7 @@ repos:
     rev: 2.3.245 # change to tag or sha
     hooks:
       - id: checkov
-        args: [--skip-check, 'CKV_K8S_21, CKV2_GHA_1']
+        args: [--skip-check, 'CKV_K8S_21,CKV2_GHA_1']
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.79.1 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
     hooks:
