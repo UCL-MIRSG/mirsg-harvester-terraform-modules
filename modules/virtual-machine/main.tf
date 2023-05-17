@@ -31,25 +31,19 @@ resource "harvester_virtualmachine" "vm" {
     name = "nic-0"
   }
 
-  disk {
-    name        = var.vm_data.disks[0].name
-    type        = "disk"
-    size        = var.vm_data.disks[0].size
-    bus         = "virtio"
-    boot_order  = var.vm_data.disks[0].boot_order
-    image       = data.harvester_image.os_image.id
-    auto_delete = true
-  }
+  dynamic "disk" {
+    for_each = var.vm_data.disks
 
-  disk {
-    name        = var.vm_data.disks[1].name
-    type        = "disk"
-    size        = var.vm_data.disks[1].size
-    bus         = "virtio"
-    boot_order  = var.vm_data.disks[1].boot_order
-    auto_delete = true
+    content {
+      name        = disk.value.name
+      type        = "disk"
+      size        = disk.value.size
+      bus         = "virtio"
+      boot_order  = disk.value.boot_order
+      image       = data.harvester_image.os_image.id
+      auto_delete = true
+    }
   }
-
   cloudinit {
     user_data    = var.user_data
     network_data = ""

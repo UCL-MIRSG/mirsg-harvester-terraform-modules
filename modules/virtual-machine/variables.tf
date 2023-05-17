@@ -26,7 +26,7 @@ variable "vm_data" {
     tags        = map(string)
     cpus        = number
     memory      = string
-    disks = list(
+    disks = map(
       object({
         name       = string
         size       = string
