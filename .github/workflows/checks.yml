@@ -1,0 +1,60 @@
+name: Checks
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install pre-commit
+
+      - name: Setup `terraform`
+        uses: hashicorp/setup-terraform@main
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v3
+        with:
+          tflint_version: v0.44.1
+
+      - name: Show version
+        run: tflint --version
+
+      - name: Init TFLint
+        run: tflint --init
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Set PY
+        run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
+
+      - name: Cache stuff
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.pythonLocation }}
+            ~/.cache/pre-commit
+            ~/.tflint.d/plugins
+          key: >
+            cache-${{ env.PY }}-
+            ${{ hashFiles('.pre-commit-config.yaml') }}-
+            tflint-${{ hashFiles('.tflint.hcl') }}
+
+      - name: Install pre-commit hooks
+        run: pre-commit install
+
+      # This will run on all files in the repo not just those that have been
+      # committed. Once formatting has been applied once globally, from then on
+      # the files being changed by pre-commit should be just those that are
+      # being committed - provided that people are using the pre-commit hook to
+      # format their code.
+      - name: Run pre-commit
+        run: pre-commit run --all-files --color always
