@@ -27,6 +27,8 @@ repos:
         args:
           - --args=--module
       - id: terraform_validate
+        args:
+          - --tf-init-args=-upgrade
   - repo: https://github.com/aquasecurity/tfsec
     rev: v1.28.1
     hooks:
