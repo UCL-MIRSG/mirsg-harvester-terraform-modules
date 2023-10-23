@@ -30,7 +30,7 @@ repos:
         args:
           - --tf-init-args=-upgrade
   - repo: https://github.com/aquasecurity/tfsec
-    rev: v1.28.1
+    rev: v1.28.4
     hooks:
       - id: tfsec
   - repo: https://github.com/terraform-docs/terraform-docs
